@@ -1,0 +1,9 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/dktapps-pm-pl/pmforms
+branches:
+- master
+projects:
+  pmforms:
+    path: ""
+    model: virion
+    type: library
+...
