@@ -25,6 +25,7 @@ namespace dktapps\pmforms;
 
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
+use pocketmine\utils\Utils;
 
 /**
  * This form type presents a simple "yes/no" dialog with two buttons.
@@ -50,6 +51,7 @@ abstract class ModalForm extends BaseForm{
 	public function __construct(string $title, string $text, \Closure $onSubmit, string $yesButtonText = "gui.yes", string $noButtonText = "gui.no"){
 		parent::__construct($title);
 		$this->content = $text;
+		Utils::validateCallableSignature(function(Player $player, bool $choice) : void{}, $onSubmit);
 		$this->onSubmit = $onSubmit;
 		$this->button1 = $yesButtonText;
 		$this->button2 = $noButtonText;

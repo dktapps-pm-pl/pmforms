@@ -25,6 +25,7 @@ namespace dktapps\pmforms;
 
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
+use pocketmine\utils\Utils;
 
 /**
  * This form type presents a menu to the user with a list of options on it. The user may select an option or close the
@@ -52,7 +53,9 @@ abstract class MenuForm extends BaseForm{
 		parent::__construct($title);
 		$this->content = $text;
 		$this->options = array_values($options);
+		Utils::validateCallableSignature(function(Player $player, int $selectedOption) : void{}, $onSubmit);
 		$this->onSubmit = $onSubmit;
+		Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
 		$this->onClose = $onClose;
 	}
 

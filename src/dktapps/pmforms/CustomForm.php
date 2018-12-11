@@ -26,6 +26,7 @@ namespace dktapps\pmforms;
 use dktapps\pmforms\element\CustomFormElement;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
+use pocketmine\utils\Utils;
 
 abstract class CustomForm extends BaseForm{
 
@@ -56,8 +57,9 @@ abstract class CustomForm extends BaseForm{
 			$this->elementMap[$element->getName()] = $element;
 		}
 
-		//TODO: verify signature
+		Utils::validateCallableSignature(function(Player $player, CustomFormResponse $response) : void{}, $onSubmit);
 		$this->onSubmit = $onSubmit;
+		Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
 		$this->onClose = $onClose;
 	}
 
