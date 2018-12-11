@@ -36,8 +36,8 @@ abstract class ServerSettingsForm extends CustomForm{
 	 */
 	private $icon;
 
-	public function __construct(string $title, array $elements, ?FormIcon $icon = null){
-		parent::__construct($title, $elements,);
+	public function __construct(string $title, array $elements, ?FormIcon $icon, \Closure $onSubmit, ?\Closure $onClose = null){
+		parent::__construct($title, $elements, $onSubmit, $onClose);
 		$this->icon = $icon;
 	}
 
