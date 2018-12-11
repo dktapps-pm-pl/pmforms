@@ -1,0 +1,6 @@
+name: pmforms
+version: 1.0.0
+antigen: dktapps\pmforms
+api: 3.4.0
+authors: [dktapps]
+description: API allowing to manipulate the JSON forms implemented in MCPE 1.2
