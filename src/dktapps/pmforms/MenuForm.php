@@ -40,7 +40,7 @@ abstract class MenuForm extends BaseForm{
 	/** @var \Closure */
 	private $onSubmit;
 	/** @var \Closure|null */
-	private $onClose;
+	private $onClose = null;
 
 	/**
 	 * @param string        $title
@@ -55,8 +55,10 @@ abstract class MenuForm extends BaseForm{
 		$this->options = array_values($options);
 		Utils::validateCallableSignature(function(Player $player, int $selectedOption) : void{}, $onSubmit);
 		$this->onSubmit = $onSubmit;
-		Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
-		$this->onClose = $onClose;
+		if($onClose !== null){
+			Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
+			$this->onClose = $onClose;
+		}
 	}
 
 	public function getOption(int $position) : ?MenuOption{

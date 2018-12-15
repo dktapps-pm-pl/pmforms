@@ -37,7 +37,7 @@ abstract class CustomForm extends BaseForm{
 	/** @var \Closure */
 	private $onSubmit;
 	/** @var \Closure|null */
-	private $onClose;
+	private $onClose = null;
 
 	/**
 	 * @param string              $title
@@ -59,8 +59,10 @@ abstract class CustomForm extends BaseForm{
 
 		Utils::validateCallableSignature(function(Player $player, CustomFormResponse $response) : void{}, $onSubmit);
 		$this->onSubmit = $onSubmit;
-		Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
-		$this->onClose = $onClose;
+		if($onClose !== null){
+			Utils::validateCallableSignature(function(Player $player) : void{}, $onClose);
+			$this->onClose = $onClose;
+		}
 	}
 
 	/**
