@@ -30,7 +30,7 @@ use pocketmine\utils\Utils;
 /**
  * This form type presents a simple "yes/no" dialog with two buttons.
  */
-abstract class ModalForm extends BaseForm{
+class ModalForm extends BaseForm{
 
 	/** @var string */
 	private $content;

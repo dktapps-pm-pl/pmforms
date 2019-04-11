@@ -28,7 +28,7 @@ use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use pocketmine\utils\Utils;
 
-abstract class CustomForm extends BaseForm{
+class CustomForm extends BaseForm{
 
 	/** @var CustomFormElement[] */
 	private $elements;

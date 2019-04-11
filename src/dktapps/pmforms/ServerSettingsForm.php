@@ -30,7 +30,7 @@ namespace dktapps\pmforms;
  * Passing this form to {@link Player::sendForm()} will not show a form with an icon nor set this form as the server
  * settings.
  */
-abstract class ServerSettingsForm extends CustomForm{
+class ServerSettingsForm extends CustomForm{
 	/**
 	 * @var FormIcon|null
 	 */

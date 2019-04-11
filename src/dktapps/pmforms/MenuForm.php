@@ -31,7 +31,7 @@ use pocketmine\utils\Utils;
  * This form type presents a menu to the user with a list of options on it. The user may select an option or close the
  * form by clicking the X in the top left corner.
  */
-abstract class MenuForm extends BaseForm{
+class MenuForm extends BaseForm{
 
 	/** @var string */
 	protected $content;
