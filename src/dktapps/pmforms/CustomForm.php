@@ -25,7 +25,7 @@ namespace dktapps\pmforms;
 
 use dktapps\pmforms\element\CustomFormElement;
 use pocketmine\form\FormValidationException;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 
 class CustomForm extends BaseForm{
