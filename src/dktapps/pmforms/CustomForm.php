@@ -51,7 +51,7 @@ class CustomForm extends BaseForm{
 		parent::__construct($title);
 		$this->elements = array_values($elements);
 		foreach($this->elements as $element){
-			if(isset($this->elements[$element->getName()])){
+			if(isset($this->elementMap[$element->getName()])){
 				throw new \InvalidArgumentException("Multiple elements cannot have the same name, found \"" . $element->getName() . "\" more than once");
 			}
 			$this->elementMap[$element->getName()] = $element;
