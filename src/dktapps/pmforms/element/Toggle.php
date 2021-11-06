@@ -24,6 +24,8 @@ declare(strict_types=1);
 namespace dktapps\pmforms\element;
 
 use pocketmine\form\FormValidationException;
+use function gettype;
+use function is_bool;
 
 /**
  * Represents a UI on/off switch. The switch may have a default value.

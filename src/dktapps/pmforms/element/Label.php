@@ -23,6 +23,8 @@ declare(strict_types=1);
 
 namespace dktapps\pmforms\element;
 
+use function assert;
+
 /**
  * Element which displays some text on a form.
  */

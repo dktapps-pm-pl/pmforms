@@ -26,6 +26,8 @@ namespace dktapps\pmforms;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use pocketmine\utils\Utils;
+use function gettype;
+use function is_bool;
 
 /**
  * This form type presents a simple "yes/no" dialog with two buttons.

@@ -24,6 +24,9 @@ declare(strict_types=1);
 namespace dktapps\pmforms\element;
 
 use pocketmine\form\FormValidationException;
+use function array_values;
+use function gettype;
+use function is_int;
 
 abstract class BaseSelector extends CustomFormElement{
 	/** @var int */

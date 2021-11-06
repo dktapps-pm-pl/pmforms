@@ -27,6 +27,10 @@ use dktapps\pmforms\element\CustomFormElement;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use pocketmine\utils\Utils;
+use function array_values;
+use function count;
+use function gettype;
+use function is_array;
 
 class CustomForm extends BaseForm{
 

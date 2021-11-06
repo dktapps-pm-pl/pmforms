@@ -26,6 +26,9 @@ namespace dktapps\pmforms;
 use pocketmine\form\FormValidationException;
 use pocketmine\Player;
 use pocketmine\utils\Utils;
+use function array_values;
+use function gettype;
+use function is_int;
 
 /**
  * This form type presents a menu to the user with a list of options on it. The user may select an option or close the

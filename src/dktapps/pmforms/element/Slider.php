@@ -24,6 +24,9 @@ declare(strict_types=1);
 namespace dktapps\pmforms\element;
 
 use pocketmine\form\FormValidationException;
+use function gettype;
+use function is_float;
+use function is_int;
 
 class Slider extends CustomFormElement{
 
