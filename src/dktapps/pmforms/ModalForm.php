@@ -24,7 +24,7 @@ declare(strict_types=1);
 namespace dktapps\pmforms;
 
 use pocketmine\form\FormValidationException;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\utils\Utils;
 use function gettype;
 use function is_bool;
