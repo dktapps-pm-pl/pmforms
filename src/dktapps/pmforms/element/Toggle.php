@@ -41,9 +41,6 @@ class Toggle extends CustomFormElement{
 		return "toggle";
 	}
 
-	/**
-	 * @return bool
-	 */
 	public function getDefaultValue() : bool{
 		return $this->default;
 	}

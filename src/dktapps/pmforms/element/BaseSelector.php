@@ -32,10 +32,7 @@ abstract class BaseSelector extends CustomFormElement{
 	protected $options;
 
 	/**
-	 * @param string   $name
-	 * @param string   $text
 	 * @param string[] $options
-	 * @param int      $defaultOptionIndex
 	 *
 	 * @throws \InvalidArgumentException
 	 */
@@ -65,25 +62,15 @@ abstract class BaseSelector extends CustomFormElement{
 
 	/**
 	 * Returns the text of the option at the specified index, or null if it doesn't exist.
-	 *
-	 * @param int $index
-	 *
-	 * @return string|null
 	 */
 	public function getOption(int $index) : ?string{
 		return $this->options[$index] ?? null;
 	}
 
-	/**
-	 * @return int
-	 */
 	public function getDefaultOptionIndex() : int{
 		return $this->defaultOptionIndex;
 	}
 
-	/**
-	 * @return string
-	 */
 	public function getDefaultOption() : string{
 		return $this->options[$this->defaultOptionIndex];
 	}
