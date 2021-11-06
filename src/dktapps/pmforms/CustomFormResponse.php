@@ -23,10 +23,20 @@ declare(strict_types=1);
 
 namespace dktapps\pmforms;
 
+/**
+ * @phpstan-type ResponseData array<string, mixed>
+ */
 class CustomFormResponse{
-	/** @var array */
+	/**
+	 * @var mixed[]
+	 * @phpstan-var ResponseData
+	 */
 	private $data;
 
+	/**
+	 * @param mixed[] $data
+	 * @phpstan-param ResponseData $data
+	 */
 	public function __construct(array $data){
 		$this->data = $data;
 	}
@@ -51,6 +61,10 @@ class CustomFormResponse{
 		return $this->data[$name];
 	}
 
+	/**
+	 * @return mixed[]
+	 * @phpstan-return ResponseData
+	 */
 	public function getAll() : array{
 		return $this->data;
 	}

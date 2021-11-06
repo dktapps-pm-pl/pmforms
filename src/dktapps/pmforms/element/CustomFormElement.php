@@ -69,6 +69,7 @@ abstract class CustomFormElement implements \JsonSerializable{
 
 	/**
 	 * Returns an array of properties which can be serialized to JSON for sending.
+	 * @return mixed[]
 	 */
 	final public function jsonSerialize() : array{
 		$ret = $this->serializeElementData();
@@ -80,6 +81,7 @@ abstract class CustomFormElement implements \JsonSerializable{
 
 	/**
 	 * Returns an array of extra data needed to serialize this element to JSON for showing to a player on a form.
+	 * @return mixed[]
 	 */
 	abstract protected function serializeElementData() : array;
 }

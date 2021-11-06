@@ -67,11 +67,6 @@ class Slider extends CustomFormElement{
 		return "slider";
 	}
 
-	/**
-	 * @param float $value
-	 *
-	 * @throws FormValidationException
-	 */
 	public function validateValue($value) : void{
 		if(!is_float($value) and !is_int($value)){
 			throw new FormValidationException("Expected float, got " . gettype($value));

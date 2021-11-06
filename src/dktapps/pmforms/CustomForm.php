@@ -32,21 +32,34 @@ use function count;
 use function gettype;
 use function is_array;
 
+/**
+ * @phpstan-type OnSubmit \Closure(Player $player, CustomFormResponse $data) : void
+ * @phpstan-type OnClose \Closure(Player $player) : void
+ */
 class CustomForm extends BaseForm{
 
 	/** @var CustomFormElement[] */
 	private $elements;
 	/** @var CustomFormElement[] */
 	private $elementMap = [];
-	/** @var \Closure */
+	/**
+	 * @var \Closure
+	 * @phpstan-var OnSubmit
+	 */
 	private $onSubmit;
-	/** @var \Closure|null */
+	/**
+	 * @var \Closure|null
+	 * @phpstan-var OnClose|null
+	 */
 	private $onClose = null;
 
 	/**
 	 * @param CustomFormElement[] $elements
 	 * @param \Closure            $onSubmit signature `function(Player $player, CustomFormResponse $data)`
 	 * @param \Closure|null       $onClose signature `function(Player $player)`
+	 *
+	 * @phpstan-param OnSubmit     $onSubmit
+	 * @phpstan-param OnClose|null $onClose
 	 *
 	 * @throws \InvalidArgumentException
 	 */
@@ -95,7 +108,6 @@ class CustomForm extends BaseForm{
 
 			$values = [];
 
-			/** @var array $data */
 			foreach($data as $index => $value){
 				if(!isset($this->elements[$index])){
 					throw new FormValidationException("Element at offset $index does not exist");

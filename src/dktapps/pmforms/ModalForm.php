@@ -31,12 +31,17 @@ use function is_bool;
 
 /**
  * This form type presents a simple "yes/no" dialog with two buttons.
+ *
+ * @phpstan-type OnSubmit \Closure(Player $player, bool $choice) : void
  */
 class ModalForm extends BaseForm{
 
 	/** @var string */
 	private $content;
-	/** @var \Closure */
+	/**
+	 * @var \Closure
+	 * @phpstan-var OnSubmit
+	 */
 	private $onSubmit;
 	/** @var string */
 	private $button1;
@@ -49,6 +54,8 @@ class ModalForm extends BaseForm{
 	 * @param \Closure $onSubmit signature `function(Player $player, bool $choice)`
 	 * @param string   $yesButtonText Text to show on the "Yes" button. Defaults to client-translated "Yes" string.
 	 * @param string   $noButtonText Text to show on the "No" button. Defaults to client-translated "No" string.
+	 *
+	 * @phpstan-param OnSubmit $onSubmit
 	 */
 	public function __construct(string $title, string $text, \Closure $onSubmit, string $yesButtonText = "gui.yes", string $noButtonText = "gui.no"){
 		parent::__construct($title);

@@ -49,11 +49,6 @@ abstract class BaseSelector extends CustomFormElement{
 		$this->defaultOptionIndex = $defaultOptionIndex;
 	}
 
-	/**
-	 * @param int $value
-	 *
-	 * @throws FormValidationException
-	 */
 	public function validateValue($value) : void{
 		if(!is_int($value)){
 			throw new FormValidationException("Expected int, got " . gettype($value));

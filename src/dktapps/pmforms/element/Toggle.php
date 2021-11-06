@@ -47,11 +47,6 @@ class Toggle extends CustomFormElement{
 		return $this->default;
 	}
 
-	/**
-	 * @param bool $value
-	 *
-	 * @throws FormValidationException
-	 */
 	public function validateValue($value) : void{
 		if(!is_bool($value)){
 			throw new FormValidationException("Expected bool, got " . gettype($value));

@@ -48,11 +48,6 @@ class Input extends CustomFormElement{
 		return "input";
 	}
 
-	/**
-	 * @param string $value
-	 *
-	 * @throws FormValidationException
-	 */
 	public function validateValue($value) : void{
 		if(!is_string($value)){
 			throw new FormValidationException("Expected string, got " . gettype($value));
