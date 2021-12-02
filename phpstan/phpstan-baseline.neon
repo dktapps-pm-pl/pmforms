@@ -1,0 +1,22 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method dktapps\\\\pmforms\\\\CustomFormResponse\\:\\:getBool\\(\\) should return bool but returns mixed\\.$#"
+			count: 1
+			path: ../src/dktapps/pmforms/CustomFormResponse.php
+
+		-
+			message: "#^Method dktapps\\\\pmforms\\\\CustomFormResponse\\:\\:getFloat\\(\\) should return float but returns mixed\\.$#"
+			count: 1
+			path: ../src/dktapps/pmforms/CustomFormResponse.php
+
+		-
+			message: "#^Method dktapps\\\\pmforms\\\\CustomFormResponse\\:\\:getInt\\(\\) should return int but returns mixed\\.$#"
+			count: 1
+			path: ../src/dktapps/pmforms/CustomFormResponse.php
+
+		-
+			message: "#^Method dktapps\\\\pmforms\\\\CustomFormResponse\\:\\:getString\\(\\) should return string but returns mixed\\.$#"
+			count: 1
+			path: ../src/dktapps/pmforms/CustomFormResponse.php
+
