@@ -3,4 +3,4 @@ version: 2.0.0
 antigen: dktapps\pmforms
 api: 4.0.0
 authors: [dktapps]
-description: Create basic UIs in Minecraft: Bedrock
+description: Create basic UIs in Minecraft Bedrock
