@@ -1,7 +1,5 @@
 # pmforms
-Form API library for PocketMine-MP plugins
-
-This is extracted from the `forms-api` branch of PocketMine-MP, but uses closures instead of anonymous classes.
+Form API library for PocketMine-MP plugins using closures for handling data
 
 ## API documentation
 There's no documentation yet, but you can check out the [demo plugin](https://github.com/dktapps-pm-pl/pmforms-demo) which shows how to use its API in a plugin.
