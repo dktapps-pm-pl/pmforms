@@ -71,6 +71,7 @@ abstract class CustomFormElement implements \JsonSerializable{
 	 * Returns an array of properties which can be serialized to JSON for sending.
 	 * @return mixed[]
 	 */
+	#[\ReturnTypeWillChange]
 	final public function jsonSerialize() : array{
 		$ret = $this->serializeElementData();
 		$ret["type"] = $this->getType();
