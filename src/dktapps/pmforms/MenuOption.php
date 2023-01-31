@@ -50,6 +50,7 @@ class MenuOption implements \JsonSerializable{
 		return $this->image;
 	}
 
+	#[\ReturnTypeWillChange]
 	public function jsonSerialize(){
 		$json = [
 			"text" => $this->text
