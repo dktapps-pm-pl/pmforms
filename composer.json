@@ -1,0 +1,19 @@
+{
+	"name": "dktapps/pmforms",
+	"type": "library",
+	"description": "Form API library for PocketMine-MP plugins",
+	"license": "LGPL-3.0",
+	"minimum-stability": "dev",
+	"require": {
+		"pocketmine/pocketmine-mp": "^4.0.0"
+	},
+	"autoload": {
+		"psr-0": {
+			"dktapps\\pmforms\\": "src/"
+		}
+	},
+	"x-virion": {
+		"spec": "3.0",
+		"namespace-root": "dktapps\\pmforms"
+	}
+}
