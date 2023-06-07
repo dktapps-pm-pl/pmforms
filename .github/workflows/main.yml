@@ -7,34 +7,50 @@ on:
 
 jobs:
   build:
-    name: PHPStan analysis
+    name: PHPStan analysis (PM ${{ matrix.constraint }}${{ matrix.pm }}, PHP ${{ matrix.php }})
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         php:
-          - "8.0"
           - "8.1"
           - "8.2"
+        pm:
+          - 4.0.0
+          - 5.0.0
+        constraint:
+          - "" #exact version, e.g. 4.0.0, 5.0.0
+          - "^" #most recent patch version, e.g. 4.21.1, 5.0.0
+        include:
+          # 4.0.0 original release ran on PHP 8.0, but 4.21 and 5.x don't support it
+          - php: "8.0"
+            pm: 4.0.0
+            constraint: ""
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Get PocketMine-MP major version
+        id: major
+        run: echo PM_VERSION_MAJOR=$(echo ${{ matrix.pm }} | cut -d. -f1) >> $GITHUB_OUTPUT
 
       - name: Setup PHP
-        uses: shivammathur/setup-php@2.15.0
+        uses: pmmp/setup-php-action@2.0.0
         with:
           php-version: ${{ matrix.php }}
+          install-path: "./bin"
+          pm-version-major: ${{ steps.major.outputs.PM_VERSION_MAJOR }}
 
       - name: Restore Composer package cache
         id: composer-cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: "~/.cache/composer"
           key: "php-${{ matrix.php }}-composer-${{ hashFiles('**/composer.json') }}"
           restore-keys: "php-${{ matrix.php }}-composer-"
 
       - name: Install PHPStan Composer dependencies
-        run: composer install --prefer-dist --no-interaction --ignore-platform-reqs
+        run: composer update --with pocketmine/pocketmine-mp:${{ matrix.constraint }}${{ matrix.pm }} --prefer-dist --no-interaction
 
       - name: Run PHPStan
         run: vendor/bin/phpstan analyze
