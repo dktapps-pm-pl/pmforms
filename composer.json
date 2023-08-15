@@ -13,8 +13,8 @@
 		"phpstan/extension-installer": "^1.0"
 	},
 	"autoload": {
-		"psr-0": {
-			"dktapps\\pmforms\\": "src/"
+		"psr-4": {
+			"": "src/"
 		}
 	},
 	"config": {
