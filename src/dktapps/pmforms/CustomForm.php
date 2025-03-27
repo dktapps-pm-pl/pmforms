@@ -24,9 +24,12 @@ declare(strict_types=1);
 namespace dktapps\pmforms;
 
 use dktapps\pmforms\element\CustomFormElement;
+use dktapps\pmforms\element\Label;
 use pocketmine\form\FormValidationException;
 use pocketmine\player\Player;
+use pocketmine\utils\AssumptionFailedError;
 use pocketmine\utils\Utils;
+use function array_fill;
 use function array_values;
 use function count;
 use function gettype;
@@ -102,29 +105,74 @@ class CustomForm extends BaseForm{
 				($this->onClose)($player);
 			}
 		}elseif(is_array($data)){
-			if(($actual = count($data)) !== ($expected = count($this->elements))){
-				throw new FormValidationException("Expected $expected result data, got $actual");
-			}
-
-			$values = [];
-
-			foreach($data as $index => $value){
-				if(!isset($this->elements[$index])){
-					throw new FormValidationException("Element at offset $index does not exist");
-				}
-				$element = $this->elements[$index];
-				try{
-					$element->validateValue($value);
-				}catch(FormValidationException $e){
-					throw new FormValidationException("Validation failed for element \"" . $element->getName() . "\": " . $e->getMessage(), 0, $e);
-				}
-				$values[$element->getName()] = $value;
-			}
-
-			($this->onSubmit)($player, new CustomFormResponse($values));
+			($this->onSubmit)($player, $this->buildResponseFromData($data));
 		}else{
 			throw new FormValidationException("Expected array or null, got " . gettype($data));
 		}
+	}
+
+	/**
+	 * @param mixed[] $data
+	 * @throws FormValidationException
+	 */
+	public function buildResponseFromData(array $data) : CustomFormResponse{
+		$actual = count($data);
+		$expected = count($this->elements);
+		if($actual > $expected){
+			throw new FormValidationException("Too many result elements, expected $expected, got $actual");
+		}elseif($actual < $expected){
+			//In 1.21.70, the client doesn't send nulls for labels, so we need to polyfill them here to
+			//maintain the old behaviour
+			$noLabelsIndexMapping = [];
+			foreach($this->elements as $index => $element){
+				if(!($element instanceof Label)){
+					$noLabelsIndexMapping[] = $index;
+				}
+			}
+			$expectedWithoutLabels = count($noLabelsIndexMapping);
+			if($actual !== $expectedWithoutLabels){
+				throw new FormValidationException("Wrong number of result elements, expected either " .
+					$expected .
+					" (with label values, <1.21.70) or " .
+					$expectedWithoutLabels .
+					" (without label values, >=1.21.70), got " .
+					$actual
+				);
+			}
+
+			//polyfill the missing nulls
+			$mappedData = array_fill(0, $expected, null);
+			foreach($data as $givenIndex => $value){
+				$internalIndex = $noLabelsIndexMapping[$givenIndex] ?? null;
+				if($internalIndex === null){
+					throw new FormValidationException("Can't map given offset $givenIndex to an internal element offset (while correcting for labels)");
+				}
+				//set the appropriate values according to the given index
+				//this could (?) still leave unexpected nulls, but the validation below will catch that
+				$mappedData[$internalIndex] = $value;
+			}
+			if(count($mappedData) !== $expected){
+				throw new AssumptionFailedError("This should always match");
+			}
+			$data = $mappedData;
+		}
+
+		$values = [];
+
+		foreach($data as $index => $value){
+			if(!isset($this->elements[$index])){
+				throw new FormValidationException("Element at offset $index does not exist");
+			}
+			$element = $this->elements[$index];
+			try{
+				$element->validateValue($value);
+			}catch(FormValidationException $e){
+				throw new FormValidationException("Validation failed for element \"" . $element->getName() . "\": " . $e->getMessage(), 0, $e);
+			}
+			$values[$element->getName()] = $value;
+		}
+
+		return new CustomFormResponse($values);
 	}
 
 	protected function getType() : string{
