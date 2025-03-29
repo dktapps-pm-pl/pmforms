@@ -65,6 +65,9 @@ class Slider extends CustomFormElement{
 		if($value < $this->min || $value > $this->max){
 			throw new FormValidationException("Value $value is out of bounds (min $this->min, max $this->max)");
 		}
+		if($value !== 0 and fmod((float)$value, $this->step) !== (float)0){//do not use % operator
+			throw new FormValidationException("Value $value is not divisible by step ($this->step)");
+		}
 	}
 
 	public function getMin() : float{
